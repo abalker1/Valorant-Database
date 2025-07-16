@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+<title>Welcome</title>
+</head>
+<body onload = "slide()">
+<div id = "introduction">
+<h1>Welcome to Agent Information</h1>
+<button type="button" id="introEnter" onclick="location.href = 'index.php';">Enter the Realm</button>
+</div>
+
+<img class = "slide" src = "AgentsSlide.png">
+
+<style>
+@font-face {
+	font-family:Valorant;
+	src: url(Valorant.ttf);
+}
+
+* {
+	font-family:Valorant;
+}
+
+#introduction {
+	text-align:center;
+	color:white;
+	text-shadow: 3px 1px grey;
+}
+
+body {
+	background: url("IntroBackground.png") no-repeat center center fixed;
+	background-size:cover;
+}
+
+.slide {
+	position:fixed;
+	bottom:-100%;
+	left:50%;
+	transform: translateX(-50%);
+	transition: bottom 2s ease-in-out;
+}
+
+.slide.active {
+	bottom:0;
+}
+
+
+button {
+	background-color:grey;
+	color:white;
+	text-shadow: 3px 1px black;
+	font-size:40px;
+	size:40px;
+}
+
+img {
+	max-height:80%;
+	z-index:-1;
+}
+</style>
+<script>
+	function slide() {
+            document.querySelector('.slide').classList.add('active');
+        }
+</script>
+</body>
