@@ -18,17 +18,17 @@ class Agent {
 	}
 	
 	function GetAgentName() {
-		return $this->agent_name;
+		return $this->agentName;
 	}
 	function SetAgentName($an) {
-		$this->agent_name = $an;
+		$this->agentName = $an;
 	}
 	
 	function GetRealName() {
-		return $this->real_name;
+		return $this->realName;
 	}
 	function SetRealName($rn) {
-		$this->real_name = $rn;
+		$this->realName = $rn;
 	}
 	
 	function GetGender() {
