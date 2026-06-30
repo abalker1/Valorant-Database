@@ -62,7 +62,7 @@ function genderToBoolean($gender) {
 $isMale = genderToBoolean($gender);
 
 
-$sql = "INSERT INTO agents (agentName, realName, gender, age, role, img) VALUES ('".$agentName."','".$realName."','".$isMale."','".$age."','".$role."','".$img."')";
+$sql = "INSERT INTO agents (agent_name, real_name, gender, age, role, img) VALUES ('".$agentName."','".$realName."','".$isMale."','".$age."','".$role."','".$img."')";
 
 if ($conn->query($sql) == TRUE) {
     echo "Inserted!";
