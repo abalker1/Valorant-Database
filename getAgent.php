@@ -4,10 +4,10 @@ include 'agents.php';
 $index = $_POST['index'];
 
 
-    $servername = "localhost";
-    $username = "AdminLab11";
-    $password = "4VPnroTOC6wOU3mn";
-    $dbname = "agents";
+$servername = getenv("DB_HOST");
+$username = getenv("DB_USER");
+$password = getenv("DB_PASS");
+$dbname = getenv("DB_NAME");
 
     // Create a new connection to the MySQL server
     $conn = new mysqli($servername, $username, $password, $dbname);
