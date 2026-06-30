@@ -1,7 +1,7 @@
 <?php
 include 'agents.php';
 
-$index = $_POST['index'];
+$index = $_REQUEST['index'];
 
 
 $servername = getenv("DB_HOST");
