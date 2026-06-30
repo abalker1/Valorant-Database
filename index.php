@@ -274,7 +274,7 @@ function insert() {
 	toggleEdit();
 	insertButtonElement.onclick = function () {
         collectText(index);
-        insertRequest();
+        insertRequest(newId);
         insertButtonElement.style.display = "none";
     };
 }
