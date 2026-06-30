@@ -1,17 +1,6 @@
 <?php
 include 'agents.php';
 
-$agentName = $_POST['newAgentName'];
-$realName = $_POST['newRealName'];
-$gender = $_POST['newGender'];
-$age = $_POST['newAge'];
-$role = $_POST['newRole'];
-$img = $_POST['newImg'];
-
-if (isset($_FILES['imgUpload']) && $_FILES['imgUpload']['error'] == UPLOAD_ERR_OK) {
-    $img = base64_encode(file_get_contents($_FILES['imgUpload']['tmp_name']));
-}
-
 $servername = getenv("DB_HOST");
 $username = getenv("DB_USER");
 $password = getenv("DB_PASS");
@@ -26,48 +15,30 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get the maximum value from the `id` column
-$sqlMaxId = "SELECT MAX(`id`) AS maxId FROM `agents`";
-$resultMaxId = $conn->query($sqlMaxId);
+// Grab variables and escape them to prevent SQL syntax errors
+$id = $conn->real_escape_string($_POST['id']);
+$agentName = $conn->real_escape_string($_POST['newAgentName']);
+$realName = $conn->real_escape_string($_POST['newRealName']);
+$gender = $_POST['newGender'];
+$age = $conn->real_escape_string($_POST['newAge']);
+$role = $conn->real_escape_string($_POST['newRole']);
+$img = $conn->real_escape_string($_POST['newImg']);
 
-// Check if there are results
-if ($resultMaxId) {
-    $rowMaxId = $resultMaxId->fetch_assoc();
-    $maxId = $rowMaxId['maxId'];
-
-    // Alter the table to set the auto-increment value
-    $sqlAlterAutoIncrement = "ALTER TABLE `agents` AUTO_INCREMENT = " . ($maxId + 1);
-    $resultAlterAutoIncrement = $conn->query($sqlAlterAutoIncrement);
-
-    if (!$resultAlterAutoIncrement) {
-        echo "Error resetting auto-increment: " . $conn->error;
-        $conn->close();
-        exit;
-    }
-} else {
-    echo "Error fetching maximum ID: " . $conn->error;
-    $conn->close();
-    exit;
-}
-
-// Insert new agent
-//check if male or female
+// Convert gender to a strict 1 or 0 for MySQL
 function genderToBoolean($gender) {
-    // Convert the gender string to lowercase for case-insensitive comparison
     $lowercaseGender = strtolower($gender);
-
-    // Check if the lowercase gender is "male", return true if it is, otherwise return false
-    return $lowercaseGender === 'male';
+    return $lowercaseGender === 'male' ? 1 : 0;
 }
 $isMale = genderToBoolean($gender);
 
+// Insert new agent including the ID passed from JavaScript
+$sql = "INSERT INTO agents (id, agent_name, real_name, gender, age, role, img) 
+        VALUES ('$id', '$agentName', '$realName', '$isMale', '$age', '$role', '$img')";
 
-$sql = "INSERT INTO agents (agent_name, real_name, gender, age, role, img) VALUES ('".$agentName."','".$realName."','".$isMale."','".$age."','".$role."','".$img."')";
-
-if ($conn->query($sql) == TRUE) {
+if ($conn->query($sql) === TRUE) {
     echo "Inserted!";
 } else {
-    echo "Error: " . $sql . " <br>" . $conn->error;
+    echo "Error: " . $conn->error;
 }
 
 // Close the database connection
