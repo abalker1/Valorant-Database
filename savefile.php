@@ -4,10 +4,10 @@ include 'agents.php';
 // Retrieve the JSON data from the POST request
 $data = json_decode($_POST['mynewdata'], true);
 
-$servername = "localhost";
-$username = "AdminLab11";
-$password = "4VPnroTOC6wOU3mn";
-$dbname = "agents";
+$servername = getenv("DB_HOST");
+$username = getenv("DB_USER");
+$password = getenv("DB_PASS");
+$dbname = getenv("DB_NAME");
 
 // Create a new connection to MySQL server
 $conn = new mysqli($servername, $username, $password, $dbname);
