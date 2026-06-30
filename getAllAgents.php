@@ -5,9 +5,10 @@ $servername = getenv("DB_HOST");
 $username = getenv("DB_USER");
 $password = getenv("DB_PASS");
 $dbname = getenv("DB_NAME");
+$port = getenv("DB_PORT");
 
 // Create a new connection to the MySQL server
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
 // Check the connection
 if ($conn->connect_error) {
