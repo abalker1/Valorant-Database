@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 }
 
 // Create the Agent table
-$sql = "CREATE TABLE IF NOT EXISTS Agent (
+$sql = "CREATE TABLE IF NOT EXISTS agents (
     id INT(20) PRIMARY KEY,
     agent_name VARCHAR(30) NOT NULL,
     real_name VARCHAR(30) NOT NULL,
@@ -28,7 +28,7 @@ $sql = "CREATE TABLE IF NOT EXISTS Agent (
 )";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Table Agent created or already exists<br>";
+    echo "Table agents created or already exists<br>";
 } else {
     echo "Error creating table: " . $conn->error . "<br>";
 }
