@@ -25,8 +25,8 @@ if ($result) {
     if ($result->num_rows > 0) {
         // Fetch all rows of data
         while ($row = $result->fetch_assoc()) {
-            $agentName = $row['agentName'];
-            $realName = $row['realName'];
+            $agentName = $row['agent_name'];
+            $realName = $row['real_name'];
             $gender = $row['gender'] == 0 ? 'Male' : 'Female';
             $age = $row['age'];
             $role = $row['role'];
