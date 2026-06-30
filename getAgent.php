@@ -29,8 +29,8 @@ $dbname = getenv("DB_NAME");
 
 
 
-			$agentName=$row['agentName'];
-			$realName = $row['realName'];
+			$agentName=$row['agent_name'];
+			$realName = $row['real_name'];
 			$gender = $row['gender'] == 0 ? 'Male' : 'Female';
 			$age = $row['age'];
 			$role = $row['role'];
