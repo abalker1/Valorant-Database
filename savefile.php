@@ -17,16 +17,15 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Loop through each agent in the data array and insert into the database
 foreach ($data as $agent) {
-    $agent_name = $conn->real_escape_string($agent['agentName']);
-    $real_name = $conn->real_escape_string($agent['realName']);
+    $agentName = $conn->real_escape_string($agent['agentName']);
+    $realName = $conn->real_escape_string($agent['realName']);
     $gender = $agent['gender'] ? 1 : 0; // Convert boolean to integer
     $age = $conn->real_escape_string($agent['age']);
     $role = $conn->real_escape_string($agent['role']);
     $img = $conn->real_escape_string($agent['img']);
 
-    // Insert the agent into the database
+    // Insert the agent into the database using the variables defined above
     $sql = "INSERT INTO agents (agent_name, real_name, gender, age, role, img) 
             VALUES ('$agentName', '$realName', '$gender', '$age', '$role', '$img')";
 
