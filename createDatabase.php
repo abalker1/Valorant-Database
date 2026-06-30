@@ -5,26 +5,10 @@ $ag1 = new Agent("Reyna", "Zyanya", false, 25, "Duelist", "Reyna.png");
 $ag2 = new Agent("Jett", "Sunwoo", false, 20, "Duelist", "Jett.png");
 $agentArray = array($ag1, $ag2);
 
-$servername = "localhost";
-$username = "AdminLab11";
-$password = "4VPnroTOC6wOU3mn";
-$dbname = "agents";
-
-// Create a connection to MySQL server
-$conn = new mysqli($servername, $username, $password);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error . "<br>");
-}
-
-// Create the database if it doesn't exist
-$sql = "CREATE DATABASE IF NOT EXISTS " . $dbname;
-if ($conn->query($sql) === TRUE) {
-    echo "Database " . $dbname . " created or already exists<br>";
-} else {
-    echo "Error creating database: " . $conn->error . "<br>";
-}
-
-$conn->close();
+$servername = getenv("DB_HOST");
+$username = getenv("DB_USER");
+$password = getenv("DB_PASS");
+$dbname = getenv("DB_NAME");
 
 // Open a new connection to the created database
 $conn = new mysqli($servername, $username, $password, $dbname);
