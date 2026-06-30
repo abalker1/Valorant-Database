@@ -12,10 +12,10 @@ if (isset($_FILES['imgUpload']) && $_FILES['imgUpload']['error'] == UPLOAD_ERR_O
     $img = base64_encode(file_get_contents($_FILES['imgUpload']['tmp_name']));
 }
 
-$servername = "localhost";
-$username = "AdminLab11";
-$password = "4VPnroTOC6wOU3mn";
-$dbname = "agents";
+$servername = getenv("DB_HOST");
+$username = getenv("DB_USER");
+$password = getenv("DB_PASS");
+$dbname = getenv("DB_NAME");
 
 // Create a new connection to the MySQL server
 $conn = new mysqli($servername, $username, $password, $dbname);
